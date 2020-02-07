@@ -20,29 +20,29 @@ function New-UDTimeLine {
         [Parameter()]
         [string]$Id = (New-Guid).ToString(),
         [Parameter()]
-        [string]$width = "100%",
+        [string]$Width = "100%",
         [Parameter()]
-        [string]$height = "400px",
+        [string]$Height = "400px",
         [Parameter()]
-        [scriptblock]$data,
+        [scriptblock]$Data,
         [Parameter()]
-        [bool]$showRowLabels, # = $true,
+        [bool]$ShowRowLabels, # = $true,
         [Parameter()]
-        [bool]$showRowNumber, # = $false,
+        [bool]$ShowRowNumber, # = $false,
         [Parameter()]
-        [bool]$groupByRowLabel, # = $false,
+        [bool]$GroupByRowLabel, # = $false,
         [Parameter()]
-        [bool]$colorByRowLabel, # = $true,
+        [bool]$ColorByRowLabel, # = $true,
         [Parameter()]
-        [string]$backgroundColor, # = "#ffd",
+        [string]$BackgroundColor, # = "#ffd",
         [Parameter()]
-        [array]$colors, # = @('#95a3b3', '#f7f06d', '#fe5f55'),
+        [array]$Colors, # = @('#95a3b3', '#f7f06d', '#fe5f55'),
         [Parameter()]
-        [string]$fontName, #= "Garamond",
+        [string]$FontName, #= "Garamond",
         [Parameter()]
-        [int]$fontSize, # = 20,
+        [int]$FontSize, # = 20,
         [Parameter()]
-        [string]$fontColor # = "#000"
+        [string]$FontColor # = "#000"
     )
 
     End {
@@ -72,18 +72,18 @@ function New-UDTimeLine {
 
             # This is where you can put any other properties. They are passed to the React control's props
             # The keys are case-sensitive in JS.
-            width           = $width
-            height          = $height
+            width           = $Width
+            height          = $Height
             data            = $MainData
-            showRowLabels   = $showRowLabels
-            showRowNumber   = $showRowNumber
-            groupByRowLabel = $groupByRowLabel
-            colorByRowLabel = $colorByRowLabel
-            backgroundColor = $backgroundColor
-            colors          = $colors
-            color           = $fontColor
-            fontName        = $fontName
-            fontSize        = $fontSize
+            showRowLabels   = $ShowRowLabels
+            showRowNumber   = $ShowRowNumber
+            groupByRowLabel = $GroupByRowLabel
+            colorByRowLabel = $ColorByRowLabel
+            backgroundColor = $BackgroundColor
+            colors          = $Colors
+            color           = $FontColor
+            fontName        = $FontName
+            fontSize        = $FontSize
         }
 
     }

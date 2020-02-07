@@ -26,32 +26,31 @@ function New-UDTimeLine {
         [Parameter()]
         [scriptblock]$Data,
         [Parameter()]
-        [bool]$ShowRowLabels, # = $true,
+        [bool]$ShowRowLabels,
         [Parameter()]
-        [bool]$ShowRowNumber, # = $false,
+        [bool]$ShowRowNumber,
         [Parameter()]
-        [bool]$GroupByRowLabel, # = $false,
+        [bool]$GroupByRowLabel,
         [Parameter()]
-        [bool]$ColorByRowLabel, # = $true,
+        [bool]$ColorByRowLabel,
         [Parameter()]
-        [string]$BackgroundColor, # = "#ffd",
+        [string]$BackgroundColor,
         [Parameter()]
-        [array]$Colors, # = @('#95a3b3', '#f7f06d', '#fe5f55'),
+        [string]$FontName,
         [Parameter()]
-        [string]$FontName, #= "Garamond",
+        [int]$FontSize,
         [Parameter()]
-        [int]$FontSize, # = 20,
-        [Parameter()]
-        [string]$FontColor # = "#000"
+        [string]$FontColor
     )
 
     End {
         [System.Collections.ArrayList]$MainData = @()
-        foreach ($Item in [array]$Data.Invoke()) {
+        [array]$RawData = [array]$Data.Invoke()
+        foreach ($Item in $RawData) {
             [System.Collections.ArrayList]$ItemData = @(
                 $Item.RowLabel
-                $Item.BarLabel
-                $Item.ToolTip
+                #$Item.BarLabel
+                #$Item.ToolTip
 
                 #https://developers.google.com/chart/interactive/docs/datesandtimes#dates-and-times-using-the-date-string-representation
                 #Important: When using this Date String Representation, as when using the new Date() constructor, months are indexed starting at zero (January is month 0, December is month 11).
@@ -60,6 +59,18 @@ function New-UDTimeLine {
             )
             $MainData.Add($ItemData) | Out-Null
         }
+
+        [array]$Colors = $null
+        [array]$DataColors = $RawData.Color | ?{$_}
+        if($DataColors)
+        {
+            if(@($DataColors).Count -ne (@($RawData).Count))
+            {
+                throw 'color is not defined in all data items.'
+            }
+            [array]$Colors = @($DataColors)
+        }
+
         @{
             # The AssetID of the main JS File
             assetId         = $AssetId

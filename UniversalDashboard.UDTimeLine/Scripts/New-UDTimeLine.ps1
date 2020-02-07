@@ -54,6 +54,9 @@ function New-UDTimeLine {
         [int]$FontSize,
 
         [Parameter()]
+        [int]$BarFontSize,
+
+        [Parameter()]
         [string]$FontColor
     )
 
@@ -118,7 +121,7 @@ function New-UDTimeLine {
         if ($PSBoundParameters.ContainsKey('FontColor')) { $Component.color = $FontColor }
         if ($PSBoundParameters.ContainsKey('FontName')) { $Component.fontName = $FontName }
         if ($PSBoundParameters.ContainsKey('FontSize')) { $Component.fontSize = $FontSize }
-
+        if ($PSBoundParameters.ContainsKey('BarFontSize')) { $Component.barFontSize = $BarFontSize }
         $Component
     }
 }

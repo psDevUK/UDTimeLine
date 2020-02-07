@@ -24,7 +24,7 @@ function New-UDTimeLine {
         [string]$Width = "100%",
 
         [Parameter()]
-        [string]$Height = "400px",
+        [string]$Height,
 
         [Parameter()]
         [scriptblock]$Data,

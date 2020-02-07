@@ -84,11 +84,9 @@ function New-UDTimeLine {
         }
 
         [array]$Colors = $null
-        [array]$DataColors = $RawData.Color | ?{$_}
-        if($DataColors)
-        {
-            if(@($DataColors).Count -ne (@($RawData).Count))
-            {
+        [array]$DataColors = $RawData.Color | ? { $_ }
+        if ($DataColors) {
+            if (@($DataColors).Count -ne (@($RawData).Count)) {
                 throw 'color is not defined in all data items.'
             }
             [array]$Colors = @($DataColors)
@@ -96,31 +94,30 @@ function New-UDTimeLine {
 
         $Component = @{
             # The AssetID of the main JS File
-            assetId         = $AssetId
+            assetId  = $AssetId
             # Tell UD this is a plugin
-            isPlugin        = $true
+            isPlugin = $true
             # This ID must be the same as the one used in the JavaScript to register the control with UD
-            type            = "UD-TimeLine"
+            type     = "UD-TimeLine"
             # An ID is mandatory
-            id              = $Id
-            onClick              = $OnClick
+            id       = $Id
+            onClick  = $OnClick
 
             # This is where you can put any other properties. They are passed to the React control's props
             # The keys are case-sensitive in JS.
-            width           = $Width
-            height          = $Height
-            data            = $MainData
+            width    = $Width
+            height   = $Height
+            data     = $MainData
         }
-
-        if($PSBoundParameters.ContainsKey('ShowRowLabels')){$Component.showRowLabels = $ShowRowLabels}
-        if($PSBoundParameters.ContainsKey('showRowNumber')){$Component.showRowNumber = $ShowRowNumber}
-        if($PSBoundParameters.ContainsKey('GroupByRowLabel')){$Component.groupByRowLabel = $GroupByRowLabel}
-        if($PSBoundParameters.ContainsKey('ColorByRowLabel')){$Component.colorByRowLabel = $ColorByRowLabel}
-        if($PSBoundParameters.ContainsKey('BackgroundColor')){$Component.backgroundColor = $BackgroundColor}
-        if($Colors){$Component.colors = $Colors}
-        if($PSBoundParameters.ContainsKey('FontColor')){$Component.color = $FontColor}
-        if($PSBoundParameters.ContainsKey('FontName')){$Component.fontName = $FontName}
-        if($PSBoundParameters.ContainsKey('FontSize')){$Component.fontSize = $FontSize}
+        if ($PSBoundParameters.ContainsKey('ShowRowLabels')) { $Component.showRowLabels = $ShowRowLabels }
+        if ($PSBoundParameters.ContainsKey('showRowNumber')) { $Component.showRowNumber = $ShowRowNumber }
+        if ($PSBoundParameters.ContainsKey('GroupByRowLabel')) { $Component.groupByRowLabel = $GroupByRowLabel }
+        if ($PSBoundParameters.ContainsKey('ColorByRowLabel')) { $Component.colorByRowLabel = $ColorByRowLabel }
+        if ($PSBoundParameters.ContainsKey('BackgroundColor')) { $Component.backgroundColor = $BackgroundColor }
+        if ($Colors) { $Component.colors = $Colors }
+        if ($PSBoundParameters.ContainsKey('FontColor')) { $Component.color = $FontColor }
+        if ($PSBoundParameters.ContainsKey('FontName')) { $Component.fontName = $FontName }
+        if ($PSBoundParameters.ContainsKey('FontSize')) { $Component.fontSize = $FontSize }
 
         $Component
     }

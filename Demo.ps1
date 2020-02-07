@@ -7,7 +7,6 @@ Start-UDDashboard -Port 10000 -Dashboard (
     New-UDDashboard -Title 'Powershell UniversalDashboard' -Content {
         New-UDCard -Content {
             New-UDHeading -Text 'Simple Example' -Size 3
-
             New-UDTimeLine -Id 'Timeline_Simple' -Data {
                 New-UDTimeLineData -RowLabel "Washington" -Start (Get-Date -Year 1789 -Month 4 -Day 30) -End (Get-Date -Year 1797 -Month 3 -Day 4)
                 New-UDTimeLineData -RowLabel "Adams" -Start (Get-Date -Year 1797 -Month 3 -Day 4) -End (Get-Date -Year 1801 -Month 3 -Day 4)
@@ -26,6 +25,15 @@ Start-UDDashboard -Port 10000 -Dashboard (
                 New-UDTimeLineData -RowLabel "Task1" -Start (Get-Date).AddMilliseconds(-3534) -End (Get-Date) -Color '#95a3b3'
                 New-UDTimeLineData -RowLabel "Task2" -Start (Get-Date).AddSeconds(-34) -End (Get-Date) -Color '#f7f06d'
                 New-UDTimeLineData -RowLabel "Task3" -Start (Get-Date).AddMinutes(-3) -End (Get-Date) -Color '#6abf0f'
+            }
+
+            New-UDHeading -Text 'OnClick Example' -Size 3
+            New-UDTimeLine -Id 'Timeline_OnClick' -Data {
+                New-UDTimeLineData -RowLabel "Washington" -Start (Get-Date -Year 1789 -Month 4 -Day 30) -End (Get-Date -Year 1797 -Month 3 -Day 4)
+                New-UDTimeLineData -RowLabel "Adams" -Start (Get-Date -Year 1797 -Month 3 -Day 4) -End (Get-Date -Year 1801 -Month 3 -Day 4)
+                New-UDTimeLineData -RowLabel "Jefferson" -Start (Get-Date -Year 1801 -Month 3 -Day 4) -End (Get-Date -Year 1809 -Month 3 -Day 4)    
+            } -OnClick {
+                Show-UDToast -Message "EventData [$EventData]"
             }
         }
     }

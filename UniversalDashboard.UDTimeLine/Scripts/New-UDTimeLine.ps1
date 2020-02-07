@@ -19,31 +19,54 @@ function New-UDTimeLine {
     param(
         [Parameter()]
         [string]$Id = (New-Guid).ToString(),
+
         [Parameter()]
         [string]$Width = "100%",
+
         [Parameter()]
         [string]$Height = "400px",
+
         [Parameter()]
         [scriptblock]$Data,
+
+        [Parameter()]
+        [object]$OnClick,
+
         [Parameter()]
         [bool]$ShowRowLabels,
+
         [Parameter()]
         [bool]$ShowRowNumber,
+
         [Parameter()]
         [bool]$GroupByRowLabel,
+
         [Parameter()]
         [bool]$ColorByRowLabel,
+
         [Parameter()]
         [string]$BackgroundColor,
+
         [Parameter()]
         [string]$FontName,
+
         [Parameter()]
         [int]$FontSize,
+
         [Parameter()]
         [string]$FontColor
     )
 
     End {
+        if ($null -ne $OnClick) {
+            if ($OnClick -is [scriptblock]) {
+                $OnClick = New-UDEndpoint -Endpoint $OnClick -Id ($Id + "onClick")
+            }
+            elseif ($OnClick -isnot [UniversalDashboard.Models.Endpoint]) {
+                throw "OnClick must be a script block or UDEndpoint"
+            }
+        }
+
         [System.Collections.ArrayList]$MainData = @()
         [array]$RawData = [array]$Data.Invoke()
         foreach ($Item in $RawData) {
@@ -80,6 +103,7 @@ function New-UDTimeLine {
             type            = "UD-TimeLine"
             # An ID is mandatory
             id              = $Id
+            onClick              = $OnClick
 
             # This is where you can put any other properties. They are passed to the React control's props
             # The keys are case-sensitive in JS.

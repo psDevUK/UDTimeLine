@@ -20,29 +20,29 @@ function New-UDTimeLine {
         [Parameter()]
         [string]$Id = (New-Guid).ToString(),
         [Parameter()]
-        [string]$width = "100%",
+        [string]$Width = "100%",
         [Parameter()]
-        [string]$height = "400px",
+        [string]$Height = "400px",
         [Parameter()]
-        [scriptblock]$data,
+        [scriptblock]$Data,
         [Parameter()]
-        [bool]$showRowLabels = $true,
+        [bool]$ShowRowLabels, # = $true,
         [Parameter()]
-        [bool]$showRowNumber = $false,
+        [bool]$ShowRowNumber, # = $false,
         [Parameter()]
-        [bool]$groupByRowLabel = $false,
+        [bool]$GroupByRowLabel, # = $false,
         [Parameter()]
-        [bool]$colorByRowLabel = $true,
+        [bool]$ColorByRowLabel, # = $true,
         [Parameter()]
-        [string]$backgroundColor = "#ffd",
+        [string]$BackgroundColor, # = "#ffd",
         [Parameter()]
-        [array]$colors = @('#95a3b3', '#f7f06d', '#fe5f55'),
+        [array]$Colors, # = @('#95a3b3', '#f7f06d', '#fe5f55'),
         [Parameter()]
-        [string]$fontName = "Garamond",
+        [string]$FontName, #= "Garamond",
         [Parameter()]
-        [int]$fontSize = 20,
+        [int]$FontSize, # = 20,
         [Parameter()]
-        [string]$fontColor = "#000"
+        [string]$FontColor # = "#000"
     )
 
     End {
@@ -50,11 +50,13 @@ function New-UDTimeLine {
         foreach ($Item in [array]$Data.Invoke()) {
             [System.Collections.ArrayList]$ItemData = @(
                 $Item.RowLabel
+                $Item.BarLabel
+                $Item.ToolTip
+
                 #https://developers.google.com/chart/interactive/docs/datesandtimes#dates-and-times-using-the-date-string-representation
                 #Important: When using this Date String Representation, as when using the new Date() constructor, months are indexed starting at zero (January is month 0, December is month 11).
-                "Date($($Item.Start.Year), $($Item.Start.Month - 1), $($Item.Start.Day))"
-                "Date($($Item.End.Year), $($Item.End.Month - 1), $($Item.End.Day))"
-
+                "Date($($Item.Start.Year), $($Item.Start.Month - 1), $($Item.Start.Day), $($Item.Start.Hour), $($Item.Start.Minute), $($Item.Start.Second), $($Item.Start.Millisecond))"
+                "Date($($Item.End.Year), $($Item.End.Month - 1), $($Item.End.Day), $($Item.End.Hour), $($Item.End.Minute), $($Item.End.Second), $($Item.End.Millisecond))"
             )
             $MainData.Add($ItemData) | Out-Null
         }
@@ -70,18 +72,18 @@ function New-UDTimeLine {
 
             # This is where you can put any other properties. They are passed to the React control's props
             # The keys are case-sensitive in JS.
-            width           = $width
-            height          = $height
+            width           = $Width
+            height          = $Height
             data            = $MainData
-            showRowLabels   = $showRowLabels
-            showRowNumber   = $showRowNumber
-            groupByRowLabel = $groupByRowLabel
-            colorByRowLabel = $colorByRowLabel
-            backgroundColor = $backgroundColor
-            colors          = $colors
-            color           = $fontColor
-            fontName        = $fontName
-            fontSize        = $fontSize
+            showRowLabels   = $ShowRowLabels
+            showRowNumber   = $ShowRowNumber
+            groupByRowLabel = $GroupByRowLabel
+            colorByRowLabel = $ColorByRowLabel
+            backgroundColor = $BackgroundColor
+            colors          = $Colors
+            color           = $FontColor
+            fontName        = $FontName
+            fontSize        = $FontSize
         }
 
     }

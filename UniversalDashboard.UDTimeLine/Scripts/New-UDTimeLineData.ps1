@@ -30,7 +30,10 @@ function New-UDTimeLineData {
         [DateTime]$Start,
 
         [Parameter(Mandatory = $true)]
-        [DateTime]$End
+        [DateTime]$End,
+
+        [Parameter(Mandatory = $false)]
+        $Color
     )
 
     End {
@@ -41,6 +44,7 @@ function New-UDTimeLineData {
 
             Start   = $Start
             End   = $End
+            Color   = $Color
         }
 
     }

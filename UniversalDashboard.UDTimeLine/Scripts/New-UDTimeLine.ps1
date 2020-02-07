@@ -71,7 +71,7 @@ function New-UDTimeLine {
             [array]$Colors = @($DataColors)
         }
 
-        @{
+        $Component = @{
             # The AssetID of the main JS File
             assetId         = $AssetId
             # Tell UD this is a plugin
@@ -86,16 +86,18 @@ function New-UDTimeLine {
             width           = $Width
             height          = $Height
             data            = $MainData
-            showRowLabels   = $ShowRowLabels
-            showRowNumber   = $ShowRowNumber
-            groupByRowLabel = $GroupByRowLabel
-            colorByRowLabel = $ColorByRowLabel
-            backgroundColor = $BackgroundColor
-            colors          = $Colors
-            color           = $FontColor
-            fontName        = $FontName
-            fontSize        = $FontSize
         }
 
+        if($PSBoundParameters.ContainsKey('ShowRowLabels')){$Component.showRowLabels = $ShowRowLabels}
+        if($PSBoundParameters.ContainsKey('showRowNumber')){$Component.showRowNumber = $ShowRowNumber}
+        if($PSBoundParameters.ContainsKey('GroupByRowLabel')){$Component.groupByRowLabel = $GroupByRowLabel}
+        if($PSBoundParameters.ContainsKey('ColorByRowLabel')){$Component.colorByRowLabel = $ColorByRowLabel}
+        if($PSBoundParameters.ContainsKey('BackgroundColor')){$Component.backgroundColor = $BackgroundColor}
+        if($Colors){$Component.colors = $Colors}
+        if($PSBoundParameters.ContainsKey('FontColor')){$Component.color = $FontColor}
+        if($PSBoundParameters.ContainsKey('FontName')){$Component.fontName = $FontName}
+        if($PSBoundParameters.ContainsKey('FontSize')){$Component.fontSize = $FontSize}
+
+        $Component
     }
 }

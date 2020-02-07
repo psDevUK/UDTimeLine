@@ -26,23 +26,23 @@ function New-UDTimeLine {
         [Parameter()]
         [scriptblock]$data,
         [Parameter()]
-        [bool]$showRowLabels = $true,
+        [bool]$showRowLabels, # = $true,
         [Parameter()]
-        [bool]$showRowNumber = $false,
+        [bool]$showRowNumber, # = $false,
         [Parameter()]
-        [bool]$groupByRowLabel = $false,
+        [bool]$groupByRowLabel, # = $false,
         [Parameter()]
-        [bool]$colorByRowLabel = $true,
+        [bool]$colorByRowLabel, # = $true,
         [Parameter()]
-        [string]$backgroundColor = "#ffd",
+        [string]$backgroundColor, # = "#ffd",
         [Parameter()]
-        [array]$colors = @('#95a3b3', '#f7f06d', '#fe5f55'),
+        [array]$colors, # = @('#95a3b3', '#f7f06d', '#fe5f55'),
         [Parameter()]
-        [string]$fontName = "Garamond",
+        [string]$fontName, #= "Garamond",
         [Parameter()]
-        [int]$fontSize = 20,
+        [int]$fontSize, # = 20,
         [Parameter()]
-        [string]$fontColor = "#000"
+        [string]$fontColor # = "#000"
     )
 
     End {
@@ -50,11 +50,13 @@ function New-UDTimeLine {
         foreach ($Item in [array]$Data.Invoke()) {
             [System.Collections.ArrayList]$ItemData = @(
                 $Item.RowLabel
+                $Item.BarLabel
+                $Item.ToolTip
+
                 #https://developers.google.com/chart/interactive/docs/datesandtimes#dates-and-times-using-the-date-string-representation
                 #Important: When using this Date String Representation, as when using the new Date() constructor, months are indexed starting at zero (January is month 0, December is month 11).
-                "Date($($Item.Start.Year), $($Item.Start.Month - 1), $($Item.Start.Day))"
-                "Date($($Item.End.Year), $($Item.End.Month - 1), $($Item.End.Day))"
-
+                "Date($($Item.Start.Year), $($Item.Start.Month - 1), $($Item.Start.Day), $($Item.Start.Hour), $($Item.Start.Minute), $($Item.Start.Second), $($Item.Start.Millisecond))"
+                "Date($($Item.End.Year), $($Item.End.Month - 1), $($Item.End.Day), $($Item.End.Hour), $($Item.End.Minute), $($Item.End.Second), $($Item.End.Millisecond))"
             )
             $MainData.Add($ItemData) | Out-Null
         }

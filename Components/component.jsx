@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
 
 const columns = [
-  { type: "string", id: "President" },
+  { type: "string", id: "RowLabel" },
+  { type: "string", id: "BarLabel" },
+  { type: "string", id: "Tooltip" },
   { type: "date", id: "Start" },
   { type: "date", id: "End" }
 ];

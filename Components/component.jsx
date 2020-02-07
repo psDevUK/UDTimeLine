@@ -11,6 +11,16 @@ const columns = [
 ];
 
 class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
+
+  handleClick = () => {
+    UniversalDashboard.publish("element-event", {
+      type: "clientEvent",
+      eventId: this.props.onClick,
+      eventName: "onClick",
+      eventData: this.getSelection()
+    });
+  };
+
   render() {
     const options = {
       backgroundColor: this.props.backgroundColor,
@@ -36,6 +46,7 @@ class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
           width={this.props.width}
           height={this.props.height}
           options={options}
+          select={this.handleClick.bind(this)}
         />
       </div>
     )

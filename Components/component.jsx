@@ -5,7 +5,7 @@ import Chart from "react-google-charts";
 const columns = [
   { type: "string", id: "RowLabel" },
   { type: "string", id: "BarLabel" },
-  { type: "string", id: "Tooltip" },
+  { type: "string", role: "Tooltip" },
   { type: "date", id: "Start" },
   { type: "date", id: "End" }
 ];

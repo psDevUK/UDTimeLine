@@ -17,7 +17,7 @@ class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
       type: "clientEvent",
       eventId: this.props.onClick,
       eventName: "onClick",
-      eventData: this.getSelection()
+      eventData: getSelection()
     });
   };
 

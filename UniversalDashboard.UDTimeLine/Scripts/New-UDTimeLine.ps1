@@ -78,10 +78,8 @@ function New-UDTimeLine {
                 $Item.BarLabel
                 $Item.ToolTip
 
-                #https://developers.google.com/chart/interactive/docs/datesandtimes#dates-and-times-using-the-date-string-representation
-                #Important: When using this Date String Representation, as when using the new Date() constructor, months are indexed starting at zero (January is month 0, December is month 11).
-                "Date($($Item.Start.Year), $($Item.Start.Month - 1), $($Item.Start.Day), $($Item.Start.Hour), $($Item.Start.Minute), $($Item.Start.Second), $($Item.Start.Millisecond))"
-                "Date($($Item.End.Year), $($Item.End.Month - 1), $($Item.End.Day), $($Item.End.Hour), $($Item.End.Minute), $($Item.End.Second), $($Item.End.Millisecond))"
+                $Item.Start
+                $Item.End
             )
             $MainData.Add($ItemData) | Out-Null
         }

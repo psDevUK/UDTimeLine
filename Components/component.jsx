@@ -12,15 +12,6 @@ const columns = [
 
 class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
 
-  handleClick = () => {
-    UniversalDashboard.publish("element-event", {
-      type: "clientEvent",
-      eventId: this.props.onClick,
-      eventName: "onClick",
-      eventData: this.getSelection()
-    });
-  };
-
   render() {
     const options = {
       backgroundColor: this.props.backgroundColor,
@@ -46,7 +37,31 @@ class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
           width={this.props.width}
           height={this.props.height}
           options={options}
-          select={this.handleClick.bind(this)}
+          chartEvents={[
+            {
+              eventName: "ready",
+              callback: ({ chartWrapper, google }) => {
+                const chart = chartWrapper.getChart();
+          
+                google.visualization.events.addListener(chart, "select", e => {
+                  const chart = chartWrapper.getChart();
+                  const selection = chart.getSelection();
+          
+                  if (selection.length === 1) {
+                    const item = this.props.data[selection[0].row];
+                    console.info("SELECT: ", item);
+          
+                    UniversalDashboard.publish("element-event", {
+                      type: "clientEvent",
+                      eventId: this.props.onClick,
+                      eventName: "onClick",
+                      eventData: item
+                    });
+                  }
+                });
+              }
+            }
+          ]}
         />
       </div>
     )

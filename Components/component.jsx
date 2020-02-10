@@ -47,7 +47,8 @@ class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
                   const chart = chartWrapper.getChart();
                   const selection = chart.getSelection();
           
-                  if (selection && selection.length === 1) {
+                  //only fire if onClick is defined and an selected item can be found
+                  if (this.props.onClick && selection && selection.length === 1) {
                     const item = this.props.data[selection[0].row];
                     console.info("SELECT: ", item);
           

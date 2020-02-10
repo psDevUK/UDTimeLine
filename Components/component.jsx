@@ -47,7 +47,7 @@ class <%=$PLASTER_PARAM_ControlName%> extends React.Component {
                   const chart = chartWrapper.getChart();
                   const selection = chart.getSelection();
           
-                  if (selection.length === 1) {
+                  if (selection && selection.length === 1) {
                     const item = this.props.data[selection[0].row];
                     console.info("SELECT: ", item);
           

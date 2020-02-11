@@ -21,10 +21,10 @@ function New-UDTimeLineData {
         [string]$RowLabel,
 
         [Parameter(Mandatory = $false)]
-        $BarLabel = $null,
+        $BarLabel = "",
 
         [Parameter(Mandatory = $false)]
-        $Tooltip = $null,
+        $tooltip = $null,
 
         [Parameter(Mandatory = $true)]
         [DateTime]$Start,
@@ -38,15 +38,12 @@ function New-UDTimeLineData {
 
     End {
         [PSCustomObject]@{
-            RowLabel    = $RowLabel
-            BarLabel   = $BarLabel
-            Tooltip   = $Tooltip
-
-             #https://developers.google.com/chart/interactive/docs/datesandtimes#dates-and-times-using-the-date-string-representation
-                #Important: When using this Date String Representation, as when using the new Date() constructor, months are indexed starting at zero (January is month 0, December is month 11).
-            Start   = "Date($($Start.Year), $($Start.Month - 1), $($Start.Day), $($Start.Hour), $($Start.Minute), $($Start.Second), $($Start.Millisecond))"
-            End   = "Date($($End.Year), $($End.Month - 1), $($End.Day), $($End.Hour), $($End.Minute), $($End.Second), $($End.Millisecond))"
-            Color   = $Color
+            RowLabel = $RowLabel
+            BarLabel = $BarLabel
+            tooltip  = $tooltip
+            Start    = "Date($($Start.Year), $($Start.Month - 1), $($Start.Day), $($Start.Hour), $($Start.Minute), $($Start.Second), $($Start.Millisecond))"
+            End      = "Date($($End.Year), $($End.Month - 1), $($End.Day), $($End.Hour), $($End.Minute), $($End.Second), $($End.Millisecond))"
+            Color    = $Color
         }
 
     }
